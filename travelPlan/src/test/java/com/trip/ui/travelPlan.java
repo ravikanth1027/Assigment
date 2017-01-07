@@ -1,5 +1,7 @@
 package com.trip.ui;
 
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,11 +12,16 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.travelplan.pages.FlightsPage;
+import com.travelplan.pages.HomePage;
+
 public class travelPlan {
 
 	public String driverPath = "src/test/resources/drivers/chromedriver.exe";
 	public WebDriver driver;
 	public WebDriverWait wait ;
+	HomePage homePage;
+	FlightsPage flightsPage;
 	
 	@BeforeTest
 	public void setDriver(){
@@ -27,7 +34,21 @@ public class travelPlan {
 	@Test
 	public void travelplanTest() throws InterruptedException{
 		driver.get("https://www.cleartrip.com/");
-		driver.findElement(By.xpath("//a[contains(text(),'Hotels')]")).click();
+		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+		homePage = new HomePage(driver);
+		flightsPage = new FlightsPage(driver);
+		
+		homePage.goToFlights();
+		
+		flightsPage.selectRoundTrip();
+		flightsPage.setFrom("Bangalore, IN - Kempegowda International Airport (BLR)");
+		flightsPage.setTo("New Delhi, IN - Indira Gandhi Airport (DEL)");
+		flightsPage.setOnDate();
+		flightsPage.setReturnDate();
+		flightsPage.numberofPassengers(1);
+		flightsPage.getFlights();
+		
+		/*driver.findElement(By.xpath("//a[contains(text(),'Hotels')]")).click();
 		WebElement flightstab ;
 		flightstab = wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//a[contains(text(),'Flights')]"))));//.click();
 		flightstab.click();
@@ -50,7 +71,7 @@ public class travelPlan {
 		Select dropdown= new Select(mySelectElement);
 		dropdown.selectByIndex(0);
 		Thread.sleep(10000);
-		driver.findElement(By.id("SearchBtn")).click();
+		driver.findElement(By.id("SearchBtn")).click();*/
 		Thread.sleep(10000);
 		driver.findElement(By.xpath("(//button[@type='submit'])[2]")).click();
 		Thread.sleep(10000);

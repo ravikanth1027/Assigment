@@ -9,7 +9,7 @@ public class FlightsPage {
 	
 	WebDriver driver;
 	
-	By roundTripRadio = By.name("RoundTrip");
+	By roundTripRadio = By.id("RoundTrip");
 
     By from = By.id("FromTag");
 
@@ -32,6 +32,36 @@ public class FlightsPage {
     public void selectRoundTrip(){
     	driver.findElement(roundTripRadio).click();
     }
+    
+    public void setFrom(String fromLocation){
+    	driver.findElement(from).sendKeys(fromLocation);
+    }
+    
+    public void setTo(String toLocation){
+    	driver.findElement(to).sendKeys(toLocation);
+    }
+    
+    public void setOnDate(){
+    	driver.findElement(OndatePicker).click();
+    	driver.findElement(onDate).click();
+    }
+    
+    public void setReturnDate(){
+    	driver.findElement(returnDatePicker).click();
+    	driver.findElement(retunDate).click();
+    }
+    
+    
+    public void numberofPassengers(int passengers){
+    	WebElement mySelectElement = driver.findElement(membersDropdown);
+    	Select dropdown= new Select(mySelectElement);
+    	dropdown.selectByIndex(passengers-1);
+    }
+    
+    public void getFlights(){
+    	driver.findElement(search).click();
+    }
+    
 	/*driver.findElement(By.id("RoundTrip")).click();
 	driver.findElement(By.id("FromTag")).sendKeys("Bangalore, IN - Kempegowda International Airport (BLR)");
 	Thread.sleep(10000);
