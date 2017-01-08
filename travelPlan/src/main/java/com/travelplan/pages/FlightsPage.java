@@ -62,6 +62,11 @@ public class FlightsPage {
     	driver.findElement(search).click();
     }
     
+    public String getTextButton(){
+    	String text = driver.findElement(search).getAttribute("value");
+    	return text;
+    }
+    
 	/*driver.findElement(By.id("RoundTrip")).click();
 	driver.findElement(By.id("FromTag")).sendKeys("Bangalore, IN - Kempegowda International Airport (BLR)");
 	Thread.sleep(10000);

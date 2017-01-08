@@ -9,7 +9,9 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -28,7 +30,7 @@ public class travelPlan {
 	SearchResultPage resultPage;
 	BookingPage bookingPage;
 	
-	@BeforeTest
+	@BeforeClass
 	public void setDriver(){
 		System.setProperty("webdriver.chrome.driver", driverPath);
 		driver = new ChromeDriver();
@@ -46,6 +48,8 @@ public class travelPlan {
 		resultPage = new SearchResultPage(driver);
 		homePage.goToFlights();
 		
+		Assert.assertEquals("Search flights", flightsPage.getTextButton());
+		///System.out.println("Search Button Text"+flightsPage.getTextButton());
 		flightsPage.selectRoundTrip();
 		flightsPage.setFrom("Bangalore, IN - Kempegowda International Airport (BLR)");
 		flightsPage.setTo("New Delhi, IN - Indira Gandhi Airport (DEL)");
@@ -55,9 +59,9 @@ public class travelPlan {
 		flightsPage.getFlights();
 		
 		Thread.sleep(10000);
-		resultPage.bookFligth();
 		
-		
+		resultPage.bookFlight();
+	
 		bookingPage.InsuranceCheck();
 		bookingPage.Continue();
 		bookingPage.setUserName("ravikanth27@gmail.com");

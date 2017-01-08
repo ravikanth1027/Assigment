@@ -18,6 +18,7 @@ public class BookingPage {
 	By LastName = By.id("AdultLname1");
 	By mobileNumber = By.id("mobileNumber");
 	By travellerButton = By.id("travellerBtn");
+	By PageTitle =  By.xpath("html/body/div[1]/header/div[2]/p");
 
 	
 	
@@ -66,4 +67,8 @@ public class BookingPage {
 		driver.findElement(travellerButton).click();;
 	}
 	
+	public String getPageTitle(){
+    	String text = driver.findElement(PageTitle).getText();
+    	return text;
+    }
 }

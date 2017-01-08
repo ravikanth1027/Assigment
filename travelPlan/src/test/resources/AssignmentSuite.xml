@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Assignment suite" verbose="1" >
+  <test name="Clear Trip suite" >
+    <packages>
+      <package name="com.trip.ui" />
+   </packages>
+ </test>
+</suite>

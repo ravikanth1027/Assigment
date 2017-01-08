@@ -14,8 +14,13 @@ public class SearchResultPage {
 			this.driver = driver;
 	}
 	
-	public void bookFligth(){
+	public void bookFlight(){
 		driver.findElement(bookButton).click();
 		
 	}
+	
+	public String getTextButton(){
+    	String text = driver.findElement(bookButton).getAttribute("value");
+    	return text;
+    }
 }
